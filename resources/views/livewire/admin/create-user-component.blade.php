@@ -9,7 +9,7 @@
                             <div class="flex-shrink-0 me-3">
                                 <div class="avatar-xs">
                                     <div class="avatar-title rounded-circle bg-soft-primary text-primary">
-                                        01
+                                        1/3
                                     </div>
                                 </div>
                             </div>
@@ -30,7 +30,7 @@
                                 <div class="col-lg-4">
                                     <div class="mb-3">
                                         <label class="form-label" for="productname">Email</label>
-                                        <input wire:model.lazy="email" type="email" class="form-control" placeholder="Enter email">
+                                        <input wire:model.defer="email" type="email" class="form-control" placeholder="Enter email">
                                         @error('email')
                                         <span class="text-danger"><strong>{{ $message }}</strong></span>
                                         @enderror
@@ -39,7 +39,7 @@
                                 <div class="col-lg-4">
                                     <div class="mb-3">
                                         <label class="form-label" for="productname">Password</label>
-                                        <input wire:model="password" type="password" class="form-control" placeholder="Enter password">
+                                        <input wire:model.defer="password" type="password" class="form-control" placeholder="Enter password">
                                         @error('password')
                                         <span class="text-danger"><strong>{{ $message }}</strong></span>
                                         @enderror
@@ -89,7 +89,6 @@
                                     <div class="d-flex flex-reverse flex-wrap gap-2">
                                         <a href="#" class="btn btn-danger"> <i class="uil uil-times"></i> Cancel </a>
                                         <a wire:click.prevent="levelOne" href="#" class="btn btn-success"> <i class="uil uil-file-alt"></i> Save </a>
-{{--                                        <button @if($step != 2) disabled @endif class="btn btn-danger"> <i class="uil uil-arrow-right"></i> Next </button>--}}
                                     </div>
                                 </div> <!-- end col -->
                             </div>
@@ -103,7 +102,7 @@
                             <div class="flex-shrink-0 me-3">
                                 <div class="avatar-xs">
                                     <div class="avatar-title rounded-circle bg-soft-primary text-primary">
-                                        02
+                                        2/3
                                     </div>
                                 </div>
                             </div>
@@ -121,7 +120,7 @@
                     <div class="p-4 border-top">
                         <form action="#" class="dropzone">
                             <div class="fallback">
-                                <input wire:model="photo" type="file">
+                                <input wire:model.defer="photo" type="file">
                                 @error('photo')
                                 <span class="text-danger"><strong>{{ $message }}</strong></span>
                                 @enderror
@@ -133,6 +132,14 @@
 
                                 <h4>Drop file here or click to upload.</h4>
                             </div>
+                            <div class="row mb-4">
+                                <div class="col ms-auto">
+                                    <div class="d-flex flex-reverse flex-wrap gap-2">
+                                        <a href="#" class="btn btn-danger"> <i class="uil uil-times"></i> Cancel </a>
+                                        <a wire:click.prevent="levelTwo" href="#" class="btn btn-success"> <i class="uil uil-file-alt"></i> Save </a>
+                                    </div>
+                                </div> <!-- end col -->
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -143,7 +150,7 @@
                             <div class="flex-shrink-0 me-3">
                                 <div class="avatar-xs">
                                     <div class="avatar-title rounded-circle bg-soft-primary text-primary">
-                                        03
+                                        3/3
                                     </div>
                                 </div>
                             </div>
@@ -212,7 +219,15 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <div class="row mb-4">
+                                <div class="col ms-auto">
+                                    <div class="d-flex flex-reverse flex-wrap gap-2">
+                                        <a href="#" class="btn btn-danger"> <i class="uil uil-times"></i> Cancel </a>
+                                        <a wire:click.prevent="levelThree" href="#" class="btn btn-success"> <i class="uil uil-file-alt"></i> Save </a>
+{{--                                        <button wire:click.prevent="prevStep" class="btn btn-danger"> <i class="uil uil-arrow-left"></i> Prev </button>--}}
+                                    </div>
+                                </div> <!-- end col -->
+                            </div>
                         </form>
                     </div>
                 </div>

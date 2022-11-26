@@ -22,17 +22,21 @@ class Helpers
 
     public static function uploadLocalImage($image,string $folder, int $width, int $height): string
     {
+
         $fileNameToStore = "no-image.png";
         if (isset($image))
         {
+            //dd($image);
             //gets the image extension
             $ext = $image->getClientOriginalExtension();
+            //dd($ext);
             //build a filename for the image
             $filename = rand(1, 10000) . time() . Str::lower(Str::random());
             $fileNameToStore = "$filename.$ext";
+            //dd($fileNameToStore);
             //sets the path for the image to be stored
             $pathToSaveImage = public_path()."/storage/$folder/$fileNameToStore";
-
+            //dd($pathToSaveImage);
             //build the image
             $createdImage = Image::make($image);
 
@@ -41,6 +45,7 @@ class Helpers
                 $constraint->upsize();
             })->save($pathToSaveImage);
         }
+        //dd($fileNameToStore);
         return $fileNameToStore;
     }
 

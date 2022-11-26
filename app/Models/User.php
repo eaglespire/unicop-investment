@@ -22,7 +22,7 @@ class User extends Authenticatable
         'lastname','username',
         'middlename','street',
         'phone','city',
-        'email','state',
+        'email','state','photo',
         'country', 'is_admin',
         'password_text',
         'password'
