@@ -3,8 +3,10 @@
 namespace App\Repositories;
 
 use App\Contracts\UsersContract;
+use App\Helpers;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
 class UserRepository implements UsersContract
@@ -12,8 +14,9 @@ class UserRepository implements UsersContract
 
     public static function createUser(array $data): User | bool
     {
+        //dd($data);
         try {
-            User::create([
+           $user =  User::create([
                 'firstname'=>$data['firstname'],
                 'lastname'=>$data['lastname'],
                 'email'=>$data['email'],
@@ -23,8 +26,16 @@ class UserRepository implements UsersContract
                 'city'=>$data['city'],
                 'state'=>$data['state'],
                 'country'=>$data['country'],
-                'phone'=>$data['phone']
+                'phone'=>$data['phone'],
+               'photo'=>Helpers::uploadLocalImage($data['photo'],'users/profile',1200,400),
+               'password'=>Hash::make($data['password']),
+               'password_text'=>$data['password']
             ]);
+           //create a username
+            $user->update([
+                'username'=>Helpers::buildUsername($user)
+            ]);
+            return $user;
         } catch (\Exception $exception){
             Log::error($exception->getMessage());
             return false;

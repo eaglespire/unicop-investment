@@ -31,6 +31,7 @@
                     </div>
                 </div>
                 <!-- end page title -->
+
                 {{ $slot }}
             </div> <!-- container-fluid -->
         </div>

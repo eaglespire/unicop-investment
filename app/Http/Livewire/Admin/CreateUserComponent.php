@@ -2,12 +2,15 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Contracts\UsersContract;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class CreateUserComponent extends Component
 {
+    use WithFileUploads;
     public $firstname,$middlename,$lastname,$email,$password,
-    $phone,$postal,$photo,$street,$city,$state,$country;
+    $phone,$postal,$photo,$street,$city,$state,$country,$counter;
 
     protected $rules = [
         'firstname'=>['required','string','max:255'],
@@ -24,9 +27,68 @@ class CreateUserComponent extends Component
         'country'=>['required','string','max:255'],
     ];
 
-    public function submit()
+    public function mount()
     {
-        dd($this->firstname);
+        $this->fill([
+            'firstname'=>'',
+            'lastname'=>'',
+            'email'=>'',
+            'password'=>'',
+            'postal'=>'',
+            'phone'=>'',
+            'middlename'=>'',
+            'street'=>'',
+            'city'=>'',
+            'state'=>'',
+            'country'=>'',
+            'counter' => 1
+        ]);
+    }
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
+
+    public function submit(UsersContract $contract)
+    {
+        $this->validate();
+        $data = [
+            'firstname'=>$this->firstname,
+            'lastname'=>$this->lastname,
+            'middlename'=>$this->middlename,
+            'email'=>$this->email,
+            'password'=>$this->password,
+            'street'=>$this->street,
+            'city'=>$this->city,
+            'state'=>$this->state,
+            'country'=>$this->country,
+            'postal'=>$this->postal,
+            'phone'=>$this->phone,
+            'photo'=>$this->photo
+        ];
+        $response = $contract::createUser($data);
+        if ($response)
+        {
+            session()->flash('success','New User Created');
+            $this->reset([
+                'firstname',
+                'middlename',
+                'lastname',
+                'email',
+                'password',
+                'phone',
+                'photo',
+                'street',
+                'country',
+                'city',
+                'state',
+                'postal'
+                ]);
+            $this->counter ++;
+        }else{
+            session()->flash('error','Something went wrong');
+        }
+        return back();
     }
 
     public function render()

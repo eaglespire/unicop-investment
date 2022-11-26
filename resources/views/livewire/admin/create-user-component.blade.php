@@ -1,4 +1,5 @@
 <div wire:key="create-user-component">
+    @include('flash.status')
     <div class="row">
         <div class="col-lg-12">
             <div id="addproduct-accordion" class="custom-accordion">
@@ -34,19 +35,28 @@
                                     <div class="col-lg-4">
                                         <div class="mb-3">
                                             <label class="form-label" for="productname">Email</label>
-                                            <input wire:model.defer="email" type="email" class="form-control" placeholder="Enter email">
+                                            <input wire:model.lazy="email" type="email" class="form-control" placeholder="Enter email">
+                                            @error('email')
+                                                <span class="text-danger"><strong>{{ $message }}</strong></span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="mb-3">
                                             <label class="form-label" for="productname">Password</label>
-                                            <input wire:model.defer="password" type="text" class="form-control" placeholder="Enter password">
+                                            <input wire:model="password" type="password" class="form-control" placeholder="Enter password">
+                                            @error('password')
+                                                <span class="text-danger"><strong>{{ $message }}</strong></span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="mb-3">
                                             <label class="form-label" for="productname">Phone Number</label>
                                             <input wire:model.defer="phone" type="text" class="form-control" placeholder="Enter phone">
+                                            @error('phone')
+                                                <span class="text-danger"><strong>{{ $message }}</strong></span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -56,18 +66,27 @@
                                         <div class="mb-3">
                                             <label class="form-label" for="">First Name</label>
                                             <input wire:model.defer="firstname" type="text" class="form-control" placeholder="Enter first name">
+                                            @error('firstname')
+                                                <span class="text-danger"><strong>{{ $message }}</strong></span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="mb-3">
                                             <label class="form-label" for="">Last Name</label>
                                             <input wire:model.defer="lastname" type="text" class="form-control" placeholder="Enter last name">
+                                            @error('lastname')
+                                                <span class="text-danger"><strong>{{ $message }}</strong></span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="mb-3">
                                             <label class="form-label" for="">Middle Name(optional)</label>
                                             <input wire:model.defer="middlename" type="text" class="form-control" placeholder="Enter middle name">
+                                            @error('middlename')
+                                                <span class="text-danger"><strong>{{ $message }}</strong></span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -105,7 +124,10 @@
                         <div class="p-4 border-top">
                             <form action="#" class="dropzone">
                                 <div class="fallback">
-                                    <input wire:model.defer="photo" type="file">
+                                    <input wire:model="photo" type="file">
+                                    @error('photo')
+                                        <span class="text-danger"><strong>{{ $message }}</strong></span>
+                                    @enderror
                                 </div>
                                 <div class="dz-message needsclick">
                                     <div class="mb-3">
@@ -151,7 +173,10 @@
                                     <div class="col-sm-6">
                                         <div class="mb-3">
                                             <label class="form-label" for="metatitle">Postal Code(optional)</label>
-                                            <input wire:model.defer="postal" type="text" class="form-control" placeholder="Enter your Meta title">
+                                            <input id="{{ $counter }}" wire:model.defer="postal" type="text" class="form-control" placeholder="Enter zip code">
+                                            @error('postal')
+                                                <span class="text-danger"><strong>{{ $message }}</strong></span>
+                                            @enderror
                                         </div>
 
                                     </div>
@@ -160,6 +185,9 @@
                                         <div class="mb-3">
                                             <label class="form-label" for="metakeywords">Street</label>
                                             <input wire:model.defer="street" type="text" class="form-control" placeholder="Enter street number">
+                                            @error('street')
+                                                <span class="text-danger"><strong>{{ $message }}</strong></span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -169,6 +197,9 @@
                                         <div class="mb-3">
                                             <label class="form-label" for="metatitle">City</label>
                                             <input wire:model.defer="city" type="text" class="form-control" placeholder="Enter city">
+                                            @error('city')
+                                                <span class="text-danger"><strong>{{ $message }}</strong></span>
+                                            @enderror
                                         </div>
 
                                     </div>
@@ -176,12 +207,18 @@
                                         <div class="mb-3">
                                             <label class="form-label" for="metakeywords">State</label>
                                             <input wire:model.defer="state" type="text" class="form-control" placeholder="Enter state">
+                                            @error('state')
+                                                <span class="text-danger"><strong>{{ $message }}</strong></span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="mb-3">
                                             <label class="form-label" for="metakeywords">Country</label>
                                             <input wire:model.defer="country" type="text" class="form-control" placeholder="Enter country">
+                                            @error('country')
+                                                <span class="text-danger"><strong>{{ $message }}</strong></span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
