@@ -825,9 +825,9 @@ body[data-layout=horizontal] .footer {
 }
 
 @media (min-width: 769px) {
-    body[data-sidebar-size=sm] {
-        min-height: 1450px
-    }
+    /*body[data-sidebar-size=sm] {*/
+    /*    min-height: 1450px*/
+    /*}*/
 }
 
 body[data-sidebar-size=sm] .main-content {

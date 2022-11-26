@@ -12,6 +12,7 @@ class CreateUserComponent extends Component
     public $firstname,$middlename,$lastname,$email,$password,
     $phone,$postal,$photo,$street,$city,$state,$country,$counter;
 
+    public $step = 1;
     protected $rules = [
         'firstname'=>['required','string','max:255'],
         'lastname'=>['required','string','max:255'],
@@ -49,22 +50,29 @@ class CreateUserComponent extends Component
         $this->validateOnly($propertyName);
     }
 
-    public function submit(UsersContract $contract)
+    public function levelOne(UsersContract $contract)
     {
-        $this->validate();
+        $this->validate([
+            'firstname'=>['required','string','max:255'],
+            'lastname'=>['required','string','max:255'],
+            'middlename'=>['nullable','string','max:255'],
+            'email'=>['required','email','unique:users','max:255'],
+            'password'=>['required','string','min:10','max:255'],
+            'phone'=>['required','string','max:15'],
+        ]);
         $data = [
             'firstname'=>$this->firstname,
             'lastname'=>$this->lastname,
             'middlename'=>$this->middlename,
             'email'=>$this->email,
             'password'=>$this->password,
-            'street'=>$this->street,
-            'city'=>$this->city,
-            'state'=>$this->state,
-            'country'=>$this->country,
-            'postal'=>$this->postal,
+//            'street'=>$this->street,
+//            'city'=>$this->city,
+//            'state'=>$this->state,
+//            'country'=>$this->country,
+//            'postal'=>$this->postal,
             'phone'=>$this->phone,
-            'photo'=>$this->photo
+//            'photo'=>$this->photo
         ];
         $response = $contract::createUser($data);
         if ($response)
@@ -85,6 +93,7 @@ class CreateUserComponent extends Component
                 'postal'
                 ]);
             $this->counter ++;
+            $this->step = 2;
         }else{
             session()->flash('error','Something went wrong');
         }
