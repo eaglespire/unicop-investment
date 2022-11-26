@@ -1,5 +1,4 @@
 <div wire:key="create-user-component">
-    <button wire:click.prevent="submit" class="btn btn-primary">Send</button>
     <div class="row">
         <div class="col-lg-12">
             <div id="addproduct-accordion" class="custom-accordion">
