@@ -14,5 +14,7 @@
 <script src="/back/assets/js/app.js"></script>
 
 @livewireScripts
+
+@stack('scripts')
 </body>
 </html>

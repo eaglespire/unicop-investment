@@ -10,7 +10,7 @@ interface UsersContract
     public static function createUser(array $data): User | bool;
     public static function deleteUser(int $userId) : bool ;
     public static function updateUser(int $userId, array $data): bool;
-    public static function readUser(int $userId) : User;
+    public static function readUser(int $userId) : User | bool;
     public static function readUsers(): Collection | bool;
     public static function banUser(int $userId);
     public static function savePhoto(int $userId, $photo);

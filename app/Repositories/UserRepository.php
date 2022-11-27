@@ -66,9 +66,14 @@ class UserRepository implements UsersContract
         }
     }
 
-    public static function readUser(int $userId): User
+    public static function readUser(int $userId): User | bool
     {
-        // TODO: Implement readUser() method.
+        try {
+            return User::where('id',$userId)->firstOrFail();
+        } catch (ModelNotFoundException $exception){
+            Log::error($exception->getMessage());
+            return false;
+        }
     }
 
     public static function readUsers(): Collection | bool

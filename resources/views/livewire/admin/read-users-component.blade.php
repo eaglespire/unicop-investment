@@ -12,7 +12,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end">
-                                    <a class="dropdown-item" href="#">Edit</a>
+                                    <a wire:click.prevent="editUser({{ $user['id'] }})" class="dropdown-item waves-effect waves-light" href="#">Edit</a>
                                     <a class="dropdown-item" href="#">Action</a>
                                     <a wire:click.prevent="deleteUser({{ $user['id'] }})" class="dropdown-item" href="#">Remove</a>
                                 </div>
@@ -27,7 +27,7 @@
                         </div>
 
                         <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-outline-light text-truncate"><i class="uil uil-user me-1"></i> Profile</button>
+                            <button wire:click.prevent="loadUser({{ $user['id'] }})" type="button" class="btn btn-outline-light text-truncate"><i class="uil uil-user me-1"></i> Profile</button>
                             <button type="button" class="btn btn-outline-light text-truncate"><i class="uil uil-envelope-alt me-1"></i> Message</button>
                         </div>
                     </div>
@@ -48,4 +48,61 @@
         </div>
         <!-- end row -->
     @endif
+
+
+
+
+    <!-- Profile show staticBackdrop Modal example -->
+    <div class="modal fade" id="userBackdropModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="userBackdropModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="userBackdropModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @include('includes.back.show-user')
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END OF STATIC BACKDROP MODAL -->
+
+    <!-- Edit modal staticBackdrop Modal example -->
+    <div class="modal fade" id="editBackdropModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="userBackdropModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="userBackdropModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    edit user {{ $firstname }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END OF STATIC BACKDROP MODAL -->
+
 </div>
+
+@push('scripts')
+    <script>
+        window.addEventListener('load-modal', event=>{
+           $('#userBackdropModal').modal('show')
+        })
+        window.addEventListener('load-edit-modal', event=>{
+            $('#editBackdropModal').modal('show')
+        })
+    </script>
+@endpush
