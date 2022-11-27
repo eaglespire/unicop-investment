@@ -1,4 +1,5 @@
 <div wire:key="read-users-component">
+    @include('flash.status')
     <div class="row">
         @if(count($users) != 0)
             @foreach($users as $user)
@@ -13,12 +14,12 @@
                                 <div class="dropdown-menu dropdown-menu-end">
                                     <a class="dropdown-item" href="#">Edit</a>
                                     <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Remove</a>
+                                    <a wire:click.prevent="deleteUser({{ $user['id'] }})" class="dropdown-item" href="#">Remove</a>
                                 </div>
                             </div>
                             <div class="clearfix"></div>
                             <div class="mb-4">
-                                <img style="object-fit: cover; object-position: center" src="{{ isset($user['photo']) ? asset("storage/users/profile/".$user['photo']) : asset('back/assets/images/users/blank-profile-picture-973460.svg') }}" alt="" class="avatar-lg rounded-circle img-thumbnail">
+                                <img style="object-fit: cover; object-position: center" src="{{ \App\Helpers::getImageSrc($user['photo'],'users/profile') }}" alt="" class="avatar-lg rounded-circle img-thumbnail">
                             </div>
                             <h5 class="font-size-16 mb-1"><a href="#" class="text-dark">{{ ucfirst($user['firstname']) }} {{ ucfirst($user['firstname']) }}</a></h5>
                             <p class="text-muted mb-2"> {{ '@'.$user['username'] }}</p>

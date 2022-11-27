@@ -12,6 +12,8 @@ class ReadUsersComponent extends Component
     public $pageNumber = 1;
     public $hasMorePages;
 
+    protected $listeners = ['refreshComponent'=>'$refresh'];
+
     public function mount(UsersContract $contract)
     {
         $this->users = new Collection();
@@ -23,6 +25,18 @@ class ReadUsersComponent extends Component
         $this->pageNumber += 1;
         $this->hasMorePages = $users->hasMorePages();
         $this->users->push(...$users->items());
+    }
+    public function deleteUser(UsersContract $contract,int $userId)
+    {
+        if ($contract::deleteUser($userId))
+        {
+            //remove it from the collection
+            $this->users = $this->users->where('id','!=',$userId);
+            session()->flash('success','User deleted...');
+        }else{
+            session()->flash('error','Error deleting...');
+        }
+        return back();
     }
 
 

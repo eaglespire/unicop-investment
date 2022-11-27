@@ -23,7 +23,7 @@ class Helpers
     public static function uploadLocalImage($image,string $folder, int $width, int $height): string
     {
 
-        $fileNameToStore = "no-image.png";
+        $fileNameToStore = "";
         if (isset($image))
         {
             //dd($image);
@@ -72,5 +72,14 @@ class Helpers
             }
         }
         return $extractedString;
+    }
+    public static function getImageSrc($filename,$folder): string
+    {
+        if (!empty($filename))
+        {
+           return asset('storage/'.$folder.'/'.$filename);
+        }else{
+            return asset("storage/$folder/no-image.svg");
+        }
     }
 }

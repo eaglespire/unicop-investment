@@ -60,7 +60,7 @@ class CreateUserComponent extends Component
     public function levelTwo(UsersContract $contract)
     {
         $this->validate([
-            'photo'=>['nullable','image','mimes:png,jpg,PNG,JPG,svg,jpeg','max:1024'],
+            'photo'=>['nullable','mimes:png,jpg,PNG,JPG,svg,jpeg','max:1024'],
         ]);
         //dd($this->photo);
         $response = $contract::savePhoto($this->userId,$this->photo);

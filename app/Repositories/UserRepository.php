@@ -40,6 +40,12 @@ class UserRepository implements UsersContract
     {
         try {
             $user = User::where('id',$userId)->firstOrFail();
+            //first delete the profile image for this user
+            if (!empty($user->photo))
+            {
+                $pathToImage = public_path("storage/users/profile/$user->photo");
+                unlink($pathToImage);
+            }
             $user->delete();
             return true;
         } catch (ModelNotFoundException $exception){
