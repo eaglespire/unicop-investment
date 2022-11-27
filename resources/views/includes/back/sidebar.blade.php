@@ -48,7 +48,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('admin.create-new-user') }}">Create New User</a></li>
-                        <li><a href="auth-register.html">Manage Users</a></li>
+                        <li><a href="{{ route('admin.read-users-component') }}">Manage Users</a></li>
                     </ul>
                 </li>
 

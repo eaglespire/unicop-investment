@@ -38,7 +38,14 @@ class UserRepository implements UsersContract
 
     public static function deleteUser(int $userId): bool
     {
-        // TODO: Implement deleteUser() method.
+        try {
+            $user = User::where('id',$userId)->firstOrFail();
+            $user->delete();
+            return true;
+        } catch (ModelNotFoundException $exception){
+            Log::error($exception->getMessage());
+            return false;
+        }
     }
 
     public static function updateUser(int $userId, array $data): bool
@@ -58,9 +65,14 @@ class UserRepository implements UsersContract
         // TODO: Implement readUser() method.
     }
 
-    public static function readUsers(): Collection
+    public static function readUsers(): Collection | bool
     {
-        // TODO: Implement readUsers() method.
+        try {
+            return User::paginate(16);
+        } catch (\Exception $exception){
+            Log::error($exception->getMessage());
+            return false;
+        }
     }
 
     public static function banUser(int $userId)
@@ -83,6 +95,15 @@ class UserRepository implements UsersContract
             ]);
             return true;
         } catch (ModelNotFoundException $exception){
+            Log::error($exception->getMessage());
+            return false;
+        }
+    }
+    public static function loadUsers(int $pageNumber)
+    {
+        try {
+            return User::paginate(6,['*'],'page',$pageNumber);
+        } catch (\Exception $exception){
             Log::error($exception->getMessage());
             return false;
         }
