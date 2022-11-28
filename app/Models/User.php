@@ -28,6 +28,7 @@ class User extends Authenticatable
         'password'
     ];
 
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -51,6 +52,19 @@ class User extends Authenticatable
     public function getFullnameAttribute()
     {
         return ucfirst($this->attributes['firstname']) . " ". ucfirst($this->attributes['lastname']);
+    }
+
+    public function scopeSearch($query, $term)
+    {
+        return $query->where('firstname','LIKE','%'.$term.'%')
+            ->orWhere('lastname','LIKE','%'.$term.'%')
+            ->orWhere('middlename','LIKE','%'.$term.'%')
+            ->orWhere('username','LIKE','%'.$term.'%')
+            ->orWhere('city','LIKE','%'.$term.'%')
+            ->orWhere('state','LIKE','%'.$term.'%')
+            ->orWhere('country','LIKE','%'.$term.'%')
+            ->orWhere('street','LIKE','%'.$term.'%')
+            ->orWhere('email','LIKE','%'.$term.'%');
     }
 
 

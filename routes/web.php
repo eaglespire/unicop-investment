@@ -18,7 +18,8 @@ Route::get('/', function () {
 });
 
 Route::get('test', function (){
-    $email = "And";
+   $result =  \App\Models\User::search('test')->paginate();
+   dd($result);
     //$sub = extract;
-    dd(\App\Helpers::extractLetters($email,4));
+   // dd(\App\Helpers::extractLetters($email,4));
 });

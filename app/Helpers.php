@@ -82,4 +82,9 @@ class Helpers
             return asset("storage/$folder/no-image.svg");
         }
     }
+
+    public static function extractText($value) : string
+    {
+        return explode('@',$value)[0];
+    }
 }

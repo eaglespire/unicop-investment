@@ -3,26 +3,45 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Contracts\UsersContract;
+use App\Models\User;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\WithPagination;
 
 class ReadUsersComponent extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, WithPagination;
     public $users;
     public $pageNumber = 1;
     public $hasMorePages;
 
+    public $term;
+    public $data;
+
     public $user_id,$firstname,$email, $photo,$lastname,$middlename,
     $phone,$username,$street,$city,$state,$country,$postal,$password_text;
 
-    protected $listeners = ['refreshComponent'=>'$refresh'];
+    protected $listeners = [
+        'refreshComponent'=>'$refresh',
+        'search-results'=>'getSearchResults',
+        'no-search-results'=>'emptyPrevSearch'
+    ];
+
+    public function getSearchResults($data)
+    {
+        $this->data = $data;
+    }
+    public function emptyPrevSearch()
+    {
+        $this->data = null;
+    }
 
     public function mount(UsersContract $contract)
     {
         $this->users = new Collection();
         $this->loadUsers($contract);
+        $this->data = null;
     }
     public function loadUsers(UsersContract $contract)
     {
