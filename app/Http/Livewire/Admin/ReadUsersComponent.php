@@ -5,9 +5,11 @@ namespace App\Http\Livewire\Admin;
 use App\Contracts\UsersContract;
 use Illuminate\Support\Collection;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class ReadUsersComponent extends Component
 {
+    use WithFileUploads;
     public $users;
     public $pageNumber = 1;
     public $hasMorePages;
@@ -42,51 +44,45 @@ class ReadUsersComponent extends Component
         return back();
     }
 
+    public function getVariables(UsersContract $contract, int $userId)
+    {
+        $user = $contract::readUser($userId);
+        if ($user)
+        {
+            $this->user_id = $user->id;
+            $this->firstname = $user->firstname;
+            $this->email = $user->email;
+            $this->phone = $user->phone;
+            $this->middlename = $user->middlename;
+            $this->lastname = $user->lastname;
+            $this->photo = $user->photo;
+            $this->username = $user->username;
+            $this->street = $user->street;
+            $this->city = $user->city;
+            $this->state = $user->state;
+            $this->country = $user->country;
+            $this->postal = $user->postal;
+            $this->password_text = $user->password_text;
+        }
+    }
+
     public function loadUser(UsersContract $contract, int $userId)
     {
         if (!empty($userId))
         {
-            $user = $contract::readUser($userId);
-            if ($user){
-                $this->user_id = $user->id;
-                $this->firstname = $user->firstname;
-                $this->email = $user->email;
-                $this->phone = $user->phone;
-                $this->middlename = $user->middlename;
-                $this->lastname = $user->lastname;
-                $this->photo = $user->photo;
-                $this->username = $user->username;
-                $this->street = $user->street;
-                $this->city = $user->city;
-                $this->state = $user->state;
-                $this->country = $user->country;
-                $this->postal = $user->postal;
-                $this->password_text = $user->password_text;
-                //load up the modal
-                $this->dispatchBrowserEvent('load-modal');
-            }else{
-                session()->flash('error','No user found');
-            }
-            return back();
+            $this->getVariables($contract,$userId);
+            //load up the modal
+            $this->dispatchBrowserEvent('load-modal');
+        }else{
+            session()->flash('error','No user found');
         }
-    }
-    public function editUser(UsersContract $contract, int $userId)
-    {
-        if (!empty($userId))
-        {
-            //fetch the user to update
-            $user = $contract::readUser($userId);
-            if ($user)
-            {
-                $this->firstname = $user->firstname;
-                $this->dispatchBrowserEvent('load-edit-modal');
-            }else{
-                session()->flash('error','User not found');
-            }
-            return back();
-        }
+        return back();
     }
 
+    public function cancelModalBtn()
+    {
+        $this->dispatchBrowserEvent('close-edit-modal');
+    }
 
     public function render()
     {

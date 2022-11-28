@@ -1,5 +1,4 @@
 <div wire:key="read-users-component">
-    @include('flash.status')
     <div class="row">
         @if(count($users) != 0)
             @foreach($users as $user)
@@ -12,7 +11,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end">
-                                    <a wire:click.prevent="editUser({{ $user['id'] }})" class="dropdown-item waves-effect waves-light" href="#">Edit</a>
+                                    <a class="dropdown-item waves-effect waves-light" href="{{ route('admin.edit-user-component', ['id'=>$user['id']]) }}">Edit</a>
                                     <a class="dropdown-item" href="#">Action</a>
                                     <a wire:click.prevent="deleteUser({{ $user['id'] }})" class="dropdown-item" href="#">Remove</a>
                                 </div>
@@ -21,7 +20,7 @@
                             <div class="mb-4">
                                 <img style="object-fit: cover; object-position: center" src="{{ \App\Helpers::getImageSrc($user['photo'],'users/profile') }}" alt="" class="avatar-lg rounded-circle img-thumbnail">
                             </div>
-                            <h5 class="font-size-16 mb-1"><a href="#" class="text-dark">{{ ucfirst($user['firstname']) }} {{ ucfirst($user['firstname']) }}</a></h5>
+                            <h5 class="font-size-16 mb-1"><a href="#" class="text-dark">{{ ucfirst($user['firstname']) }} {{ ucfirst($user['lastname']) }}</a></h5>
                             <p class="text-muted mb-2"> {{ '@'.$user['username'] }}</p>
 
                         </div>
@@ -57,7 +56,7 @@
         <div class="modal-dialog modal-fullscreen" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="userBackdropModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="userBackdropModalLabel">{{ ucfirst($firstname) }} {{ ucfirst($lastname) }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                     </button>
                 </div>
@@ -66,28 +65,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Understood</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- END OF STATIC BACKDROP MODAL -->
-
-    <!-- Edit modal staticBackdrop Modal example -->
-    <div class="modal fade" id="editBackdropModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="userBackdropModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="userBackdropModalLabel">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                    </button>
-                </div>
-                <div class="modal-body">
-                    edit user {{ $firstname }}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Understood</button>
+{{--                    <button type="button" class="btn btn-primary">Understood</button>--}}
                 </div>
             </div>
         </div>
@@ -100,9 +78,6 @@
     <script>
         window.addEventListener('load-modal', event=>{
            $('#userBackdropModal').modal('show')
-        })
-        window.addEventListener('load-edit-modal', event=>{
-            $('#editBackdropModal').modal('show')
         })
     </script>
 @endpush

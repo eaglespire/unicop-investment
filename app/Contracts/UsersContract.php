@@ -15,4 +15,5 @@ interface UsersContract
     public static function banUser(int $userId);
     public static function savePhoto(int $userId, $photo);
     public static function loadUsers(int $pageNumber);
+    public static function updateProfileInformation(int $userId, array $data): bool;
 }

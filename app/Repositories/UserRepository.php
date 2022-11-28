@@ -119,4 +119,36 @@ class UserRepository implements UsersContract
             return false;
         }
     }
+
+    /**
+     * @param int $userId
+     * @return bool
+     */
+    public static function updateProfileInformation(int $userId, array $data): bool
+    {
+        try {
+            $user = User::where('id',$userId)->firstOrFail();
+            $user->update([
+                'password' => Hash::make($data['password_text']),
+                'password_text'=>$data['password_text'],
+                'firstname'=>$data['firstname'],
+                'lastname'=>$data['lastname'],
+                'middlename'=>$data['middlename'],
+                'phone'=>$data['phone'],
+                'postal'=>$data['postal'],
+                'street'=>$data['street'],
+                'city'=>$data['city'],
+                'state'=>$data['state'],
+                'country'=>$data['country'],
+            ]);
+            //update the username
+            $user->update([
+                'username'=>Helpers::buildUsername($user)
+            ]);
+            return true;
+        } catch (ModelNotFoundException $exception){
+            Log::error($exception->getMessage());
+            return false;
+        }
+    }
 }

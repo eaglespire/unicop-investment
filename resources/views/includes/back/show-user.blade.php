@@ -9,9 +9,8 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end">
-                            <a class="dropdown-item" href="#">Edit</a>
+                            <a class="dropdown-item" href="{{ url('admin/users/edit/'.$user_id) }}">Edit</a>
                             <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Remove</a>
                         </div>
                     </div>
                     <div class="clearfix"></div>
