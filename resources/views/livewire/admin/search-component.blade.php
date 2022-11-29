@@ -1,4 +1,4 @@
-<div>
+<div wire:key="admin.search-component">
     <form class="app-search d-none d-lg-block" wire:key="search-component">
         <div class="position-relative">
             <input wire:model="term" type="text" class="form-control" placeholder="Search...">

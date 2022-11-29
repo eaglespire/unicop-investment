@@ -1,5 +1,5 @@
 @include('includes.back.head')
-
+<body>
 <!-- Begin page -->
 <div id="layout-wrapper">
     @include('includes.back.header')

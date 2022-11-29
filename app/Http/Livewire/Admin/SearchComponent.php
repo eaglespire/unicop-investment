@@ -16,12 +16,14 @@ class SearchComponent extends Component
     }
     public function render()
     {
-        sleep(2);
+        sleep(1);
         $users = User::search($this->term)->paginate(20);
         if (!empty($users))
         {
             $this->emit('search-results',$users);
-        }else{
+        }
+        if ($this->term == "")
+        {
             $this->emit('no-search-results');
         }
         //dd($users);

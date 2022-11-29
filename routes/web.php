@@ -17,9 +17,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('test', function (){
-   $result =  \App\Models\User::search('test')->paginate();
-   dd($result);
-    //$sub = extract;
-   // dd(\App\Helpers::extractLetters($email,4));
-});
+Auth::routes(['register' => false]);
+

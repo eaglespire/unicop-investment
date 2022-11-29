@@ -28,5 +28,3 @@
     @stack('styles')
 </head>
 
-
-<body>

@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Contracts\UsersContract;
-use App\Models\User;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 use Livewire\WithFileUploads;
