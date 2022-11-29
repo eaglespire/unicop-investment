@@ -1,53 +1,47 @@
-@include('includes.back.head')
-<body>
+@include('includes.newBack.head')
+<body class="left-side-menu-dark">
 <!-- Begin page -->
-<div id="layout-wrapper">
-    @include('includes.back.header')
+<div id="wrapper">
+
+    <!-- Topbar Start -->
+    @include('includes.newBack.topBar')
+    <!-- end Topbar -->
+
     <!-- ========== Left Sidebar Start ========== -->
-    @include('includes.back.sidebar')
+    @include('includes.newBack.leftBar')
     <!-- Left Sidebar End -->
 
     <!-- ============================================================== -->
-    <!-- Start right Content here -->
+    <!-- Start Page Content here -->
     <!-- ============================================================== -->
-    <div class="main-content">
-        <div class="page-content">
+
+    <div class="content-page">
+        <div class="content">
             <div class="container-fluid">
-
-                <!-- start page title -->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="page-title-box d-flex align-items-center justify-content-between">
-                            <h4 class="mb-0">{{ ucfirst(request()->segment(2)) }}</h4>
-
-                            <div class="page-title-right">
-                                <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="javascript: void(0);">{{ ucfirst(request()->segment(2)) }}</a></li>
-                                    <li class="breadcrumb-item active">{{ ucfirst(request()->segment(3)) ?? null }}</li>
-                                </ol>
-                            </div>
-
-                        </div>
+                <div class="row page-title align-items-center">
+                    <div class="col-sm-4 col-xl-6">
+                        <h4 class="mb-1 mt-0">{{ ucfirst(\App\Helpers::generatePageTitle()) }}</h4>
                     </div>
+
                 </div>
-                <!-- end page title -->
-
                 {{ $slot }}
-            </div> <!-- container-fluid -->
-        </div>
-        <!-- End Page-content -->
+            </div>
+        </div> <!-- content -->
 
 
-        @include('includes.back.footer')
+
+        <!-- Footer Start -->
+        @include('includes.newBack.footer')
+        <!-- end Footer -->
+
     </div>
-    <!-- end main content-->
+
+    <!-- ============================================================== -->
+    <!-- End Page content -->
+    <!-- ============================================================== -->
+
 
 </div>
-<!-- END layout-wrapper -->
+<!-- END wrapper -->
 
-
-
-<!-- Right bar overlay-->
-<div class="rightbar-overlay"></div>
-
-@include('includes.back.foot')
+@include('includes.newBack.foot')

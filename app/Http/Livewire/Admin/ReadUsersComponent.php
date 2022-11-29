@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Contracts\UsersContract;
+use App\Models\User;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -11,20 +12,25 @@ use Livewire\WithPagination;
 class ReadUsersComponent extends Component
 {
     use WithFileUploads, WithPagination;
-    public $users;
     public $pageNumber = 1;
+    public $users;
     public $hasMorePages;
 
-    public $term;
     public $data;
 
-    public $user_id,$firstname,$email, $photo,$lastname,$middlename,
-    $phone,$username,$street,$city,$state,$country,$postal,$password_text;
+    public $firstname,$email,$lastname,$password;
 
     protected $listeners = [
         'refreshComponent'=>'$refresh',
         'search-results'=>'getSearchResults',
         'no-search-results'=>'emptyPrevSearch'
+    ];
+
+    protected $rules = [
+        'email'=>['required','email','unique:users','max:255'],
+        'firstname'=>['required','string','max:255'],
+        'lastname'=>['required','string','max:255'],
+        'password'=>['required','string','min:8']
     ];
 
     public function getSearchResults($data)
@@ -36,72 +42,40 @@ class ReadUsersComponent extends Component
         $this->data = null;
     }
 
-    public function mount(UsersContract $contract)
+    public function mount()
     {
-        $this->users = new Collection();
-        $this->loadUsers($contract);
         $this->data = null;
-    }
-    public function loadUsers(UsersContract $contract)
-    {
-        $users = $contract::loadUsers($this->pageNumber);
-        $this->pageNumber += 1;
-        $this->hasMorePages = $users->hasMorePages();
-        $this->users->push(...$users->items());
-    }
-    public function deleteUser(UsersContract $contract,int $userId)
-    {
-        if ($contract::deleteUser($userId))
-        {
-            //remove it from the collection
-            $this->users = $this->users->where('id','!=',$userId);
-            session()->flash('success','User deleted...');
-        }else{
-            session()->flash('error','Error deleting...');
-        }
-        return back();
+        $this->users = new Collection();
+        $this->loadUsers();
     }
 
-    public function getVariables(UsersContract $contract, int $userId)
+    public function createNewUser()
     {
-        $user = $contract::readUser($userId);
+        $this->validate();
+        $data = [
+            'firstname'=>$this->firstname,
+            'lastname'=>$this->lastname,
+            'email'=>$this->email,
+            'password'=>\Hash::make($this->password)
+        ];
+        $user = User::create($data);
         if ($user)
         {
-            $this->user_id = $user->id;
-            $this->firstname = $user->firstname;
-            $this->email = $user->email;
-            $this->phone = $user->phone;
-            $this->middlename = $user->middlename;
-            $this->lastname = $user->lastname;
-            $this->photo = $user->photo;
-            $this->username = $user->username;
-            $this->street = $user->street;
-            $this->city = $user->city;
-            $this->state = $user->state;
-            $this->country = $user->country;
-            $this->postal = $user->postal;
-            $this->password_text = $user->password_text;
-        }
-    }
-
-    public function loadUser(UsersContract $contract, int $userId)
-    {
-        if (!empty($userId))
-        {
-            $this->getVariables($contract,$userId);
-            //load up the modal
-            $this->dispatchBrowserEvent('load-modal');
+            session()->flash('success','New user added');
+            $this->dispatchBrowserEvent('close-modal');
         }else{
-            session()->flash('error','No user found');
+            session()->flash('error','An error has occurred');
         }
         return back();
-    }
 
-    public function cancelModalBtn()
+    }
+    public function loadUsers()
     {
-        $this->dispatchBrowserEvent('close-edit-modal');
+        $results = User::where('is_admin',false)->paginate(6,['*'],'page',$this->pageNumber);
+        $this->pageNumber++;
+        $this->hasMorePages = $results->hasMorePages();
+        $this->users->push(...$results->items());
     }
-
     public function render()
     {
         return view('livewire.admin.read-users-component')->layout('livewire.layouts.admin-layout');

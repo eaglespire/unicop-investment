@@ -1,122 +1,114 @@
 <div wire:key="read-users-component">
-    @if(!empty($data))
-{{--        {{ dd($data['data']) }}--}}
-        <div class="row">
-            @if(count($data['data']) != 0)
-                @foreach($data['data'] as $user)
-                    <div class="col-xl-3 col-sm-6">
-                        <div class="card text-center">
-                            <div class="card-body">
-                                <div class="dropdown float-end">
-                                    <a class="text-body dropdown-toggle font-size-16" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true">
-                                        <i class="uil uil-ellipsis-h"></i>
-                                    </a>
+    <div class="row">
+        <div class="col-12">
+            <a data-toggle="modal" data-target="#newUserModal" href="#" class="btn btn-primary float-right my-2" >
+                <i class="uil uil-user-plus"></i> new user
+            </a>
+        </div>
+        @if($users->isNotEmpty())
+            @foreach($users as $user)
+                <div class="col-xl-3 col-lg-4 col-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="badge badge-success float-right">Active</div>
+                            <p class="text-success text-uppercase font-size-12 mb-2">{{ '@'.auth()->user()->username }}</p>
+                            <h5><a href="#" class="text-dark">{{ \App\Helpers::buildFullName(auth()->id()) }}</a></h5>
+                            <p class="text-muted mb-4"></p>
 
-                                    <div class="dropdown-menu dropdown-menu-end">
-                                        <a class="dropdown-item waves-effect waves-light" href="{{ route('admin.edit-user-component', ['id'=>$user['id']]) }}">Edit</a>
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a wire:click.prevent="deleteUser({{ $user['id'] }})" class="dropdown-item" href="#">Remove</a>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class="mb-4">
-                                    <img style="object-fit: cover; object-position: center" src="{{ \App\Helpers::getImageSrc($user['photo'],'users/profile') }}" alt="" class="avatar-lg rounded-circle img-thumbnail">
-                                </div>
-                                <h5 class="font-size-16 mb-1"><a href="#" class="text-dark">{{ ucfirst($user['firstname']) }} {{ ucfirst($user['lastname']) }}</a></h5>
-                                <p class="text-muted mb-2"> {{ '@'.$user['username'] }}</p>
+                            <div>
+                                <a href="javascript: void(0);">
+                                    <img src="/assets/images/users/avatar-2.jpg" alt="" class="avatar-sm m-1 rounded-circle">
+                                </a>
 
                             </div>
-
-                            <div class="btn-group" role="group">
-                                <button wire:click.prevent="loadUser({{ $user['id'] }})" type="button" class="btn btn-outline-light text-truncate"><i class="uil uil-user me-1"></i> Profile</button>
-                                <button type="button" class="btn btn-outline-light text-truncate"><i class="uil uil-envelope-alt me-1"></i> Message</button>
+                        </div>
+                        <div class="card-body border-top">
+                            <div class="row align-items-center">
+                                <div class="col-sm-auto">
+                                    <ul class="list-inline mb-0">
+                                        <li class="list-inline-item pr-2">
+                                            <a href="#" class="text-muted d-inline-block"
+                                               data-toggle="tooltip" data-placement="top" title=""
+                                               data-original-title="Edit Profile">
+                                                <i class="uil uil-edit-alt mr-1"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item pr-2">
+                                            <a href="#" class="text-muted d-inline-block"
+                                               data-toggle="tooltip" data-placement="top" title=""
+                                               data-original-title="Delete">
+                                                <i class="uil uil-trash-alt mr-1"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="#" class="text-muted d-inline-block"
+                                               data-toggle="tooltip" data-placement="top" title=""
+                                               data-original-title="Ban user">
+                                                <i class="uil uil-ban mr-1"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="#" class="text-muted d-inline-block"
+                                               data-toggle="tooltip" data-placement="top" title=""
+                                               data-original-title="Message User">
+                                                <i class="uil uil-message mr-1"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
-                @endforeach
-            @endif
-        </div>
-    @else
-        <div class="row">
-            @if(count($users) != 0)
-                @foreach($users as $user)
-                    <div class="col-xl-3 col-sm-6">
-                        <div class="card text-center">
-                            <div class="card-body">
-                                <div class="dropdown float-end">
-                                    <a class="text-body dropdown-toggle font-size-16" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true">
-                                        <i class="uil uil-ellipsis-h"></i>
-                                    </a>
-
-                                    <div class="dropdown-menu dropdown-menu-end">
-                                        <a class="dropdown-item waves-effect waves-light" href="{{ route('admin.edit-user-component', ['id'=>$user['id']]) }}">Edit</a>
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a wire:click.prevent="deleteUser({{ $user['id'] }})" class="dropdown-item" href="#">Remove</a>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class="mb-4">
-                                    <img style="object-fit: cover; object-position: center" src="{{ \App\Helpers::getImageSrc($user['photo'],'users/profile') }}" alt="" class="avatar-lg rounded-circle img-thumbnail">
-                                </div>
-                                <h5 class="font-size-16 mb-1"><a href="#" class="text-dark">{{ ucfirst($user['firstname']) }} {{ ucfirst($user['lastname']) }}</a></h5>
-                                <p class="text-muted mb-2"> {{ '@'.$user['username'] }}</p>
-
-                            </div>
-
-                            <div class="btn-group" role="group">
-                                <button wire:click.prevent="loadUser({{ $user['id'] }})" type="button" class="btn btn-outline-light text-truncate"><i class="uil uil-user me-1"></i> Profile</button>
-                                <button type="button" class="btn btn-outline-light text-truncate"><i class="uil uil-envelope-alt me-1"></i> Message</button>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            @endif
-        </div>
-        <!-- end row -->
-
-        @if($hasMorePages)
-            <div class="row mt-3">
-                <div class="col-xl-12">
-                    <div class="text-center my-3">
-                        <a wire:click.prevent="loadUsers" href="javascript:void(0);" class="text-primary"><i class="mdi mdi-loading mdi-spin font-size-20 align-middle me-2"></i> Load more </a>
-                    </div>
+                    <!-- end card -->
                 </div>
-            </div>
-            <!-- end row -->
+            @endforeach
         @endif
+    </div>
+    <!-- end row -->
+
+    @if($hasMorePages)
+        <div class="row mb-3 mt-2">
+            <div class="col-12">
+                <div wire:loading.block class="text-center">
+                    <p class="text-primary">loading...</p>
+                </div>
+                <div class="text-center">
+                    <a wire:click.prevent="loadUsers" href="javascript:void(0);" class="btn btn-white">
+                        <i data-feather="loader" class="icon-dual icon-xs mr-2"></i>
+                        Load more
+                    </a>
+                </div>
+            </div> <!-- end col-->
+        </div>
     @endif
 
+    <!-- end row -->
 
 
 
 
-    <!-- Profile show staticBackdrop Modal example -->
-    <div class="modal fade" id="userBackdropModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="userBackdropModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen" role="document">
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="newUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="userBackdropModalLabel">{{ ucfirst($firstname) }} {{ ucfirst($lastname) }}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    @include('includes.back.show-user')
+                    ...
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-{{--                    <button type="button" class="btn btn-primary">Understood</button>--}}
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- END OF STATIC BACKDROP MODAL -->
-
 </div>
 
-@push('scripts')
-    <script>
-        window.addEventListener('load-modal', event=>{
-           $('#userBackdropModal').modal('show')
-        })
-    </script>
-@endpush
+

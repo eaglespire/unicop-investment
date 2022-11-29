@@ -87,4 +87,17 @@ class Helpers
     {
         return explode('@',$value)[0];
     }
+
+    public static function buildFullName(int $userId) : string
+    {
+        $user = User::find($userId);
+        return ucfirst("$user->firstname $user->lastname");
+    }
+    public static function generatePageTitle(): string
+    {
+        $arr = \Request::segments();
+        array_shift($arr);
+
+        return implode('|',$arr);
+    }
 }
