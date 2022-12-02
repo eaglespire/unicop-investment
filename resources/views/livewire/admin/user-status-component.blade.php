@@ -5,7 +5,7 @@
                 <div class="row mb-2">
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <a href="javascript:void(0);" class="btn btn-success waves-effect waves-light"><i class="mdi mdi-plus me-2"></i> Add New</a>
+                            <a wire:click.prevent="$emit('showModal', 'SomeData')" href="javascript:void(0);" class="btn btn-success waves-effect waves-light"><i class="mdi mdi-plus me-2"></i> Add New</a>
                         </div>
                     </div>
 
@@ -145,5 +145,6 @@
             </div>
         </div>
     </div>
+    <livewire:modals.new-user-modal/>
 </div>
 <!-- end row -->

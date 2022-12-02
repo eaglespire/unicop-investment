@@ -33,14 +33,14 @@
                             <div class="col-lg-4">
                                 <div class="mb-3">
                                     <label class="form-label" for="manufacturername">FirstName</label>
-                                    <input wire:model.defer="firstname" type="text" class="form-control" placeholder="Enter your Manufacturer Name">
+                                    <input wire:model.defer="firstname" type="text" class="form-control" placeholder="Enter firstname">
                                 </div>
                             </div>
                             <div class="col-lg-4">
 
                                 <div class="mb-3">
                                     <label class="form-label" for="manufacturerbrand">Middle Name</label>
-                                    <input wire:model.defer="middlename" type="text" class="form-control" placeholder="Enter your Manufacturer Brand">
+                                    <input wire:model.defer="middlename" type="text" class="form-control" placeholder="Enter lastname">
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -55,14 +55,14 @@
                             <div class="col-lg-6">
                                 <div class="mb-3">
                                     <label class="form-label" for="manufacturername">Password</label>
-                                    <input wire:model.defer="password_text" type="text" class="form-control" placeholder="Enter your Manufacturer Name">
+                                    <input wire:model.defer="password_text" type="text" class="form-control" placeholder="Enter password">
                                 </div>
                             </div>
                             <div class="col-lg-6">
 
                                 <div class="mb-3">
                                     <label class="form-label" for="manufacturerbrand">Phone</label>
-                                    <input wire:model.defer="phone" type="text" class="form-control" placeholder="Enter your Manufacturer Brand">
+                                    <input wire:model.defer="phone" type="text" class="form-control" placeholder="Enter phone">
                                 </div>
                             </div>
                         </div>
@@ -104,7 +104,7 @@
                             <div class="col-sm-6">
                                 <div class="mb-3">
                                     <label class="form-label" for="metatitle">Street</label>
-                                    <input wire:model.defer="street" type="text" class="form-control" placeholder="Enter your Meta title">
+                                    <input wire:model.defer="street" type="text" class="form-control" placeholder="Enter street name">
                                 </div>
 
                             </div>
@@ -112,7 +112,7 @@
                             <div class="col-sm-6">
                                 <div class="mb-3">
                                     <label class="form-label" for="metakeywords">Postal Code</label>
-                                    <input wire:model.defer="postal" type="text" class="form-control" placeholder="Enter your Meta Keywords">
+                                    <input wire:model.defer="postal" type="text" class="form-control" placeholder="Enter postal code">
                                 </div>
                             </div>
                         </div>
@@ -121,7 +121,7 @@
                             <div class="col-sm-4">
                                 <div class="mb-3">
                                     <label class="form-label" for="metatitle">City</label>
-                                    <input wire:model.defer="city" type="text" class="form-control" placeholder="Enter your Meta title">
+                                    <input wire:model.defer="city" type="text" class="form-control" placeholder="Enter city">
                                 </div>
 
                             </div>
@@ -129,14 +129,14 @@
                             <div class="col-sm-4">
                                 <div class="mb-3">
                                     <label class="form-label" for="metakeywords">State</label>
-                                    <input wire:model.defer="state" type="text" class="form-control" placeholder="Enter your Meta Keywords">
+                                    <input wire:model.defer="state" type="text" class="form-control" placeholder="Enter state">
                                 </div>
                             </div>
 
                             <div class="col-sm-4">
                                 <div class="mb-3">
                                     <label class="form-label" for="metakeywords">Country</label>
-                                    <input wire:model.defer="country" type="text" class="form-control" placeholder="Enter your Meta Keywords">
+                                    <input wire:model.defer="country" type="text" class="form-control" placeholder="Enter country">
                                 </div>
                             </div>
                         </div>
