@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Contracts\UsersContract;
+use App\Models\User;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -11,50 +12,51 @@ use Livewire\WithPagination;
 class ReadUsersComponent extends Component
 {
     use WithFileUploads, WithPagination;
-    public $users;
+    //public $users;
     public $pageNumber = 1;
     public $hasMorePages;
 
-    public $term;
-    public $data;
+    public $term = "";
+    public $banDate = "2022-12-03";
 
     public $user_id,$firstname,$email, $photo,$lastname,$middlename,
     $phone,$username,$street,$city,$state,$country,$postal,$password_text;
 
     protected $listeners = [
         'refreshComponent'=>'$refresh',
-        'search-results'=>'getSearchResults',
-        'no-search-results'=>'emptyPrevSearch'
     ];
 
-    public function getSearchResults($data)
+    public function banUser(int $userId)
     {
-        $this->data = $data;
+        sleep(1);
+        $user = User::where('id',$userId)->first();
+        $user->update([
+            'banned_until'=>now()
+        ]);
+        session()->flash('success','User suspended...');
     }
-    public function emptyPrevSearch()
+    public function activateUser(int $userId)
     {
-        $this->data = null;
+        sleep(1);
+        $user = User::where('id',$userId)->first();
+        $user->update([
+            'banned_until'=>null
+        ]);
+        session()->flash('success','User unbanned...');
     }
 
-    public function mount(UsersContract $contract)
+    public function updatingTerm()
     {
-        $this->users = new Collection();
-        $this->loadUsers($contract);
-        $this->data = null;
+        $this->resetPage();
     }
-    public function loadUsers(UsersContract $contract)
-    {
-        $users = $contract::loadUsers($this->pageNumber);
-        $this->pageNumber += 1;
-        $this->hasMorePages = $users->hasMorePages();
-        $this->users->push(...$users->items());
-    }
+
     public function deleteUser(UsersContract $contract,int $userId)
     {
+        sleep(2);
         if ($contract::deleteUser($userId))
         {
-            //remove it from the collection
-            $this->users = $this->users->where('id','!=',$userId);
+            //refresh the page
+            $this->emit('refreshComponent');
             session()->flash('success','User deleted...');
         }else{
             session()->flash('error','Error deleting...');
@@ -102,8 +104,15 @@ class ReadUsersComponent extends Component
         $this->dispatchBrowserEvent('close-edit-modal');
     }
 
+
     public function render()
     {
-        return view('livewire.admin.read-users-component')->layout('livewire.layouts.admin-layout');
+        //sleep(1);
+
+        return view('livewire.admin.read-users-component',[
+            'users' => User::where('is_admin',false)
+                ->latest()->search($this->term)->paginate(8)
+        ])
+            ->layout('livewire.layouts.admin-layout');
     }
 }

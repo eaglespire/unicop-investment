@@ -25,7 +25,8 @@ class User extends Authenticatable
         'email','state','photo',
         'country', 'is_admin',
         'password_text',
-        'password'
+        'password',
+        'banned_until'
     ];
 
 
@@ -67,5 +68,22 @@ class User extends Authenticatable
             ->orWhere('email','LIKE','%'.$term.'%');
     }
 
+    public function getBannedUntilAttribute($value)
+    {
+        if (!empty($value))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
 
 }

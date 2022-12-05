@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
@@ -86,5 +87,36 @@ class Helpers
     public static function extractText($value) : string
     {
         return explode('@',$value)[0];
+    }
+
+    public static function convertJsonToArray($string)
+    {
+        return json_decode($string,true);
+    }
+    public function buildDateFromString($string)
+    {
+        return Carbon::parse($string);
+    }
+    public function buildPageTitle()
+    {
+        $appNameString = " | "." ".config('app.name');
+        if (request()->segment(3) === null)
+        {
+            return request()->segment(2). $appNameString;
+        }elseif (request()->segment(2) === null)
+        {
+            return request()->segment(1).$appNameString;
+        }else
+        {
+            return request()->segment(1).$appNameString;
+        }
+    }
+    public function getUsername(int $id)
+    {
+        return User::where('id',$id)->first()->username;
+    }
+    public function getUser(int $id)
+    {
+        return User::where('id',$id)->first();
     }
 }

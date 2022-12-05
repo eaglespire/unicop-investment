@@ -213,7 +213,9 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
-        'Image' => Intervention\Image\Facades\Image::class
+        'Image' => Intervention\Image\Facades\Image::class,
+        'Helper'=>\App\Classes\Helper::class,
+        'NotificationHelper'=>\App\Classes\NotificationHelper::class,
     ])->toArray(),
 
 ];

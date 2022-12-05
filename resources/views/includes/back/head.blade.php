@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Dashboard | {{ config('app.name') }}</title>
+    <title>{{ Helper::buildPageTitle() }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Unicop Investment Loan Brykiva Technologies" name="description" />
     <meta content="Brykiva" name="Ohwofasa Andrew" />
