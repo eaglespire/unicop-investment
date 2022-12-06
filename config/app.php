@@ -217,6 +217,7 @@ return [
         'Helper'=>\App\Classes\Helper::class,
         'NotificationHelper'=>\App\Classes\NotificationHelper::class,
         'Lease'=>\App\Classes\Lease::class,
+        'LoanAccessor'=>\App\Classes\LoanAccessor::class,
     ])->toArray(),
 
 ];

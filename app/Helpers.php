@@ -100,15 +100,19 @@ class Helpers
     public function buildPageTitle()
     {
         $appNameString = " | "." ".config('app.name');
-        if (request()->segment(3) === null)
+        if (request()->segment(4) === null) {
+            return request()->segment(3) . $appNameString;
+        }
+        elseif (request()->segment(3) === null)
         {
-            return request()->segment(2). $appNameString;
-        }elseif (request()->segment(2) === null)
+            return request()->segment(2).$appNameString;
+        }
+        elseif (request()->segment(2) === null)
         {
             return request()->segment(1).$appNameString;
         }else
         {
-            return request()->segment(1).$appNameString;
+            return request()->segment(4).$appNameString;
         }
     }
 

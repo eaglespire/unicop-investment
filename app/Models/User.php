@@ -81,9 +81,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Message::class);
     }
-    public function replies()
+    public function loans()
     {
-        return $this->hasMany(Reply::class);
+        return $this->hasMany(Loan::class);
     }
 
 }

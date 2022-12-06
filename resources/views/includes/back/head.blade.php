@@ -24,6 +24,17 @@
             color:var(--bs-breadcrumb-divider-color);
             content:var(--bs-breadcrumb-divider, "/");
         }
+        .btn.btn-primary{
+            background: #EF7722 !important;
+            border: #EF7722 !important;
+        }
+        .btn.btn-danger{
+            background: #2F8AA2 !important;
+            border: #2F8AA2 !important;
+        }
+        #sidebar-menu ul li a:hover {
+            color: var(--bs-sidebar-menu-item-hover-color);
+        }
     </style>
     @livewireStyles
     @stack('styles')

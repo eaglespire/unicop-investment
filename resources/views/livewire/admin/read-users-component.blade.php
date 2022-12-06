@@ -57,7 +57,7 @@
 
                             <div class="btn-group" role="group">
                                 <button wire:click.prevent="loadUser({{ $user['id'] }})" type="button" class="btn btn-outline-light text-truncate"><i class="uil uil-user me-1"></i> Profile</button>
-                                <button type="button" class="btn btn-outline-light text-truncate"><i class="uil uil-envelope-alt me-1"></i> Message</button>
+                                <a href="{{ route('admin.offer-loan-component', ['_id'=>$user['id']]) }}" type="button" class="btn btn-outline-light text-truncate"><i class="uil uil-envelope-alt me-1"></i> Give Loan</a>
                             </div>
                         </div>
                     </div>

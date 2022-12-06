@@ -18,12 +18,17 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-flex align-items-center justify-content-between">
-                            <h4 class="mb-0">{{ ucfirst(request()->segment(2)) }}</h4>
+                            <h4 class="mb-0">{{ ucfirst(request()->segment(1)) }}</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="javascript: void(0);">{{ ucfirst(request()->segment(2)) }}</a></li>
-                                    <li class="breadcrumb-item active">{{ ucfirst(request()->segment(3)) ?? null }}</li>
+                                    @if(request()->segment(3))
+                                        <li class="breadcrumb-item active">{{ ucfirst(request()->segment(3)) ?? ucfirst(request()->segment(2)) }}</li>
+                                    @endif
+                                    @if(request()->segment(4))
+                                        <li class="breadcrumb-item @if(request()->segment(4)) active @endif active">{{ ucfirst(request()->segment(4)) ?? ucfirst(request()->segment(3)) }}</li>
+                                    @endif
                                 </ol>
                             </div>
 
