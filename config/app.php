@@ -216,6 +216,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Helper'=>\App\Classes\Helper::class,
         'NotificationHelper'=>\App\Classes\NotificationHelper::class,
+        'Lease'=>\App\Classes\Lease::class,
     ])->toArray(),
 
 ];

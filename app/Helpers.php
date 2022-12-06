@@ -111,6 +111,20 @@ class Helpers
             return request()->segment(1).$appNameString;
         }
     }
+
+    public function buildSectionTitle()
+    {
+        if (request()->segment(3) === null)
+        {
+            return request()->segment(2);
+        }elseif (request()->segment(2) === null)
+        {
+            return request()->segment(1);
+        }else
+        {
+            return request()->segment(1);
+        }
+    }
     public function getUsername(int $id)
     {
         return User::where('id',$id)->first()->username;
