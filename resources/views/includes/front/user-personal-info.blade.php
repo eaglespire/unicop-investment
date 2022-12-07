@@ -16,8 +16,6 @@
                 </td>
 
                 <td>{{ ucfirst(auth()->user()->firstname) ?? null }}</td>
-                <td style="width: 160px;"><span class="badge bg-soft-primary font-size-12">{{ ucfirst(auth()->user()->firstname[0] ?? null) }}</span></td>
-
             </tr>
             <tr>
                 <td>
@@ -31,8 +29,6 @@
                 </td>
 
                 <td>{{ ucfirst(auth()->user()->lastname) ?? null }}</td>
-                <td><span class="badge bg-soft-primary font-size-12">{{ ucfirst(auth()->user()->lastname[0] ?? null) }}</span></td>
-
             </tr>
             <tr>
                 <td>
@@ -46,8 +42,6 @@
                 </td>
 
                 <td>{{ ucfirst(auth()->user()->middlename) ?? null }}</td>
-                <td><span class="badge bg-soft-primary font-size-12">{{ ucfirst(auth()->user()->middlename[0] ?? null) }}</span></td>
-
             </tr>
             </tbody>
         </table>

@@ -137,4 +137,8 @@ class Helpers
     {
         return User::where('id',$id)->first();
     }
+    public function getUserByEmail(string $email)
+    {
+        return User::where('email',$email)->first();
+    }
 }

@@ -12,7 +12,7 @@
         <div class="col-lg-6 offset-lg-2">
             <form class="app-search d-lg-block">
                 <div class="position-relative">
-                    <input wire:model="term" type="text" class="form-control " placeholder="Search for a user...">
+                    <input wire:model.lazy="term" type="text" class="form-control " placeholder="Search for a user...">
                     <span class="uil-search"></span>
                 </div>
                 <div wire:loading><p class="text-primary">Please wait...</p></div>
@@ -58,6 +58,7 @@
                             <div class="btn-group" role="group">
                                 <button wire:click.prevent="loadUser({{ $user['id'] }})" type="button" class="btn btn-outline-light text-truncate"><i class="uil uil-user me-1"></i> Profile</button>
                                 <a href="{{ route('admin.offer-loan-component', ['_id'=>$user['id']]) }}" type="button" class="btn btn-outline-light text-truncate"><i class="uil uil-envelope-alt me-1"></i> Give Loan</a>
+                                <a href="{{ route('admin.user-loan-component', ['_id'=>$user['id']]) }}" type="button" class="btn btn-outline-light text-truncate"><i class="uil uil-money-insert me-1"></i> Loans</a>
                             </div>
                         </div>
                     </div>

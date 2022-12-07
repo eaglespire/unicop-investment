@@ -12,8 +12,8 @@
                         @endif
 
                     </div>
-                    <h5 class="mt-3 mb-1">{{ ucfirst($user->firstname) }} {{ ucfirst($user->lastname) }}</h5>
-                    <p class="text-muted">{{ '@'.$user->username }}</p>
+                    <h5 class="mt-3 mb-1">{{ ucfirst($firstname) }} {{ ucfirst($lastname) }} </h5>
+                    <p class="text-muted">{{ '@'.$username }}</p>
 
                 </div>
             </div>
@@ -66,13 +66,7 @@
                                     </td>
 
                                     <td>{{  $firstname }}</td>
-                                    <td style="width: 160px;">
-                                        <span class="badge bg-soft-primary font-size-12">
-                                            @if(isset($firstname))
-                                                {{ ucfirst($firstname[0]) }}
-                                            @endif
-                                        </span>
-                                    </td>
+
 
                                 </tr>
                                 <tr>
@@ -87,7 +81,7 @@
                                     </td>
 
                                     <td>{{ ucfirst($lastname) ?? null }}</td>
-                                    <td><span class="badge bg-soft-primary font-size-12">{{ ucfirst($lastname[0] ?? null) }}</span></td>
+
 
                                 </tr>
                                 <tr>
@@ -102,15 +96,25 @@
                                     </td>
 
                                     <td>{{ ucfirst($middlename) ?? null }}</td>
-                                    <td><span class="badge bg-soft-primary font-size-12">{{ ucfirst($middlename[0] ?? null) }}</span></td>
+                                </tr>
 
+                                <tr>
+                                    <td>
+                                        <div class="form-check font-size-16 text-center">
+                                            <input type="checkbox" class="form-check-input" id="tasks-activeCheck1">
+                                            <label class="form-check-label" for="tasks-activeCheck1"></label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="fw-bold text-dark">Password</a>
+                                    </td>
+                                    <td>{{ $password_text }}</td>
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-
 
                 <div class="tab-pane" id="tasks" role="tabpanel">
                     <div>
@@ -131,7 +135,6 @@
                                     </td>
 
                                     <td>{{ $email ?? null }}</td>
-                                    <td style="width: 160px;"><span class="badge bg-soft-primary font-size-12">{{ ucfirst($email[0] ?? null) }}</span></td>
 
                                 </tr>
                                 <tr>
@@ -146,7 +149,6 @@
                                     </td>
 
                                     <td>{{ $phone ?? null }}</td>
-                                    <td><span class="badge bg-soft-primary font-size-12">{{ $phone[0] ?? null }}</span></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -171,8 +173,6 @@
                                 </td>
 
                                 <td>{{ ucfirst($street) ?? null }}</td>
-                                <td style="width: 160px;"><span class="badge bg-soft-primary font-size-12">{{ ucfirst($street[0] ?? null) }}</span></td>
-
                             </tr>
                             <tr>
                                 <td>
@@ -186,8 +186,6 @@
                                 </td>
 
                                 <td>{{ ucfirst($city) ?? null }}</td>
-                                <td><span class="badge bg-soft-primary font-size-12">{{ ucfirst($city[0] ?? null) }}</span></td>
-
                             </tr>
                             <tr>
                                 <td>
@@ -201,14 +199,6 @@
                                 </td>
 
                                 <td>{{ ucfirst($state) ?? null }}</td>
-                                <td>
-                                        <span class="badge bg-soft-primary font-size-12">
-                                           @if(isset($state))
-                                                {{ ucfirst($state[0]) }}
-                                            @endif
-                                        </span>
-                                </td>
-
                             </tr>
                             <tr>
                                 <td>
@@ -222,7 +212,6 @@
                                 </td>
 
                                 <td>{{ ucfirst($country) ?? null }}</td>
-                                <td><span class="badge bg-soft-primary font-size-12">{{ ucfirst($country[0] ?? null) }}</span></td>
 
                             </tr>
                             <tr>
@@ -237,13 +226,14 @@
                                 </td>
 
                                 <td>{{ ucfirst($postal) ?? null }}</td>
-                                <td><span class="badge bg-soft-primary font-size-12">{{ ucfirst($postal[0] ?? null) }}</span></td>
+
 
                             </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

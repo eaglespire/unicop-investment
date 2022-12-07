@@ -1,5 +1,6 @@
 <div wire:key="create-user-component">
     @include('flash.status')
+    <div wire:loading.block wire:target="levelOne,levelTwo,levelThree">@include('flash.processing')</div>
     <div class="row">
         <div class="col-lg-12">
             @if($step == 1)

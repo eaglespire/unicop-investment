@@ -11,6 +11,7 @@ use App\Http\Livewire\Admin\LoanSubscribersComponent;
 use App\Http\Livewire\Admin\OfferLoanComponent;
 use App\Http\Livewire\Admin\ReadUsersComponent;
 
+use App\Http\Livewire\Admin\UserLoanComponent;
 use App\Http\Livewire\Notifications\InboxComponent;
 
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,7 @@ Route::middleware(['auth','admin'])->group(function (){
     Route::get('loans/subscriber/{id}/edit', EditLoanSubsciberComponent::class)->name('edit-loan-subscriber-component');
     Route::get('loans/{_id}/edit',EditLoanCategoryComponent::class)->name('edit-loan-category-component');
     Route::get('loans/{_id}/offer',OfferLoanComponent::class)->name('offer-loan-component');
+    Route::get('user/{_id}/loans', UserLoanComponent::class)->name('user-loan-component');
 
 
 });

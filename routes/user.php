@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth')
     ->group(function (){
         Route::get('dashboard', HomeComponent::class)->name('home-component');
-        Route::get('profile',ProfileComponent::class)->name('profile-component');
+        Route::get('profile',\App\Http\Livewire\User\UserProfileComponent::class)->name('profile-component');
         Route::get('loans',UserLoanComponent::class)->name('user-loan-component');
+
     });

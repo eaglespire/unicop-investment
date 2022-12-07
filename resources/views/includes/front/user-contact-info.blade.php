@@ -16,8 +16,6 @@
                 </td>
 
                 <td>{{ auth()->user()->email ?? null }}</td>
-                <td style="width: 160px;"><span class="badge bg-soft-primary font-size-12">{{ ucfirst(auth()->user()->email[0] ?? null) }}</span></td>
-
             </tr>
             <tr>
                 <td>
@@ -31,7 +29,6 @@
                 </td>
 
                 <td>{{ auth()->user()->phone ?? null }}</td>
-                <td><span class="badge bg-soft-primary font-size-12">{{ auth()->user()->phone[0] ?? null }}</span></td>
             </tr>
             </tbody>
         </table>
@@ -54,8 +51,6 @@
                 </td>
 
                 <td>{{ ucfirst(auth()->user()->street) ?? null }}</td>
-                <td style="width: 160px;"><span class="badge bg-soft-primary font-size-12">{{ ucfirst(auth()->user()->street[0] ?? null) }}</span></td>
-
             </tr>
             <tr>
                 <td>
@@ -69,8 +64,6 @@
                 </td>
 
                 <td>{{ ucfirst(auth()->user()->city) ?? null }}</td>
-                <td><span class="badge bg-soft-primary font-size-12">{{ ucfirst(auth()->user()->city[0] ?? null) }}</span></td>
-
             </tr>
             <tr>
                 <td>
@@ -84,8 +77,6 @@
                 </td>
 
                 <td>{{ ucfirst(auth()->user()->state) ?? null }}</td>
-                <td><span class="badge bg-soft-primary font-size-12">{{ ucfirst(auth()->user()->state[0] ?? null) }}</span></td>
-
             </tr>
             <tr>
                 <td>
@@ -99,8 +90,6 @@
                 </td>
 
                 <td>{{ ucfirst(auth()->user()->country) ?? null }}</td>
-                <td><span class="badge bg-soft-primary font-size-12">{{ ucfirst(auth()->user()->country[0] ?? null) }}</span></td>
-
             </tr>
             <tr>
                 <td>
@@ -114,8 +103,6 @@
                 </td>
 
                 <td>{{ ucfirst(auth()->user()->postal) ?? null }}</td>
-                <td><span class="badge bg-soft-primary font-size-12">{{ ucfirst(auth()->user()->postal[0] ?? null) }}</span></td>
-
             </tr>
             </tbody>
         </table>

@@ -20,7 +20,7 @@ class ReadUsersComponent extends Component
     public $banDate = "2022-12-03";
 
     public $user_id,$firstname,$email, $photo,$lastname,$middlename,
-    $phone,$username,$street,$city,$state,$country,$postal,$password_text;
+    $phone,$username,$street,$city,$state,$country,$postal,$password_text,$user;
 
     protected $listeners = [
         'refreshComponent'=>'$refresh',
@@ -83,6 +83,7 @@ class ReadUsersComponent extends Component
             $this->country = $user->country;
             $this->postal = $user->postal;
             $this->password_text = $user->password_text;
+            $this->user = $user;
         }
     }
 
