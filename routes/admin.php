@@ -4,6 +4,7 @@ use App\Http\Livewire\Admin\CreateLoanComponent;
 use App\Http\Livewire\Admin\CreateUserComponent;
 use App\Http\Livewire\Admin\EditLoanCategoryComponent;
 use App\Http\Livewire\Admin\EditLoanSubsciberComponent;
+use App\Http\Livewire\Admin\EditSingleUserLoanComponent;
 use App\Http\Livewire\Admin\EditUserComponent;
 use App\Http\Livewire\Admin\HomeComponent;
 use App\Http\Livewire\Admin\LoanCategoriesComponent;
@@ -29,6 +30,7 @@ Route::middleware(['auth','admin'])->group(function (){
     Route::get('loans/{_id}/edit',EditLoanCategoryComponent::class)->name('edit-loan-category-component');
     Route::get('loans/{_id}/offer',OfferLoanComponent::class)->name('offer-loan-component');
     Route::get('user/{_id}/loans', UserLoanComponent::class)->name('user-loan-component');
+    Route::get('user/{_uid}/loan/{_lid}', EditSingleUserLoanComponent::class)->name('edit-single-user-loan-component');
 
 
 });

@@ -9,12 +9,11 @@ use Illuminate\Support\Str;
 
 class Lending
 {
-    public function create(string $name, int $amount, int $interest, int $duration) : bool
+    public function create(string $name, int $interest, int $duration) : bool
     {
         try {
            Lend::create([
                'name'=>$name,
-               'amount'=>$amount,
                'interest'=>$interest,
                'duration'=>$duration,
                'identifier'=>ucwords(Str::random(6))
@@ -37,12 +36,11 @@ class Lending
     {
         return Lend::find($id);
     }
-    public function updateLoan(int $id, int $amount, int $duration, int $interest, string $name)
+    public function updateLoan(int $id, int $duration, int $interest, string $name)
     {
         try {
             $lend = Lend::findOrFail($id);
             $lend->update([
-                'amount'=>$amount,
                 'duration'=>$duration,
                 'interest'=>$interest,
                 'name'=>$name

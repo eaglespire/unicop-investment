@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Traits\DatesResolver;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Log;
 use App\Models\Loan as Morgage;
@@ -9,8 +10,14 @@ use Illuminate\Validation\ValidationException;
 
 class Loan
 {
-    public function offerLoanToUser(int $userId, int $loanId)
+    use DatesResolver;
+    public function offerLoanToUser(int $userId, int $loanId, $amount, $startDate)
     {
+        /*
+         * Get the
+         */
+        //set end date
+        $buildLoanEndDate = DatesResolver::buildDate($startDate,$loanId);
         try {
             //check to see if the user has already accessed this loan
             $res = Morgage::where('user_id',$userId)
@@ -21,7 +28,13 @@ class Loan
             {
                 return false;
             }else{
-                Morgage::create(['user_id'=>$userId,'lending_id'=>$loanId]);
+                Morgage::create([
+                    'user_id'=>$userId,
+                    'lending_id'=>$loanId,
+                    'start_date'=>$startDate,
+                    'end_date'=>$buildLoanEndDate,
+                    'amount'=>$amount
+                ]);
                 return true;
             }
         } catch (\Exception $exception){
@@ -59,14 +72,13 @@ class Loan
         }
     }
 
-    public function calculateMonthlyInterest($loanId): float|int|null
+    public function calculateMonthlyInterest($loanId,$amount): float|int|null
     {
         //fetch the loan
         $loan = \App\Models\Lending::where('id',$loanId)->first();
         if ($loan)
         {
             //amount
-            $amount = $loan->amount;
             $rate = $loan->interest;
             $duration = $loan->duration;
             $interest =  ($amount * $rate * $duration) / (100 * 12);
@@ -74,34 +86,51 @@ class Loan
         }
         return null;
     }
-    public function calculateTotalInterest($loanId): float|int|null
+    public function calculateTotalInterest($loanId,$amount): float|int|null
     {
         //fetch the loan
         $loan = \App\Models\Lending::where('id',$loanId)->first();
         if ($loan)
         {
             //amount
-            $amount = $loan->amount;
             $rate = $loan->interest;
             $duration = $loan->duration;
             return ($amount * $rate * $duration) / (100 * 12);
         }
         return null;
     }
-    public function calculateRepayableAmount($loanId): float|int|null
+    public function calculateRepayableAmount($loanId,$amount): float|int|null
     {
         //fetch the loan
         $loan = \App\Models\Lending::where('id',$loanId)->first();
         if ($loan)
         {
             //amount
-            $amount = $loan->amount;
             $rate = $loan->interest;
             $duration = $loan->duration;
             $interest = ($amount * $rate * $duration) / (100 * 12 );
             return $amount + $interest;
         }
         return null;
+    }
+
+    public function updateLoanAccess(int $loanId, $amount,$date,$lendingId)
+    {
+        //dd($loanId,$amount,$date,$lendingId);
+        try {
+            $loanOwner = \App\Models\Loan::where('id',$loanId)->firstOrFail();
+            //dd($loanOwner);
+            $loanOwner->update([
+               'amount'=>$amount,
+               'start_date'=>$date,
+               'lending_id'=> $lendingId,
+                'end_date'=>DatesResolver::buildDate($date,$lendingId)
+            ]);
+            return true;
+        } catch (ModelNotFoundException $exception){
+            Log::error($exception->getMessage());
+            return false;
+        }
     }
 
 }
