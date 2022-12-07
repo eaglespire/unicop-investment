@@ -78,14 +78,14 @@
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="uil uil-save"></i>
-                        <span>Investment Management</span>
+                        <span>Manage Investment</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
                         <li>
-                            <a href="javascript: void(0);" class="">New</a>
+                            <a href="{{ route('admin.create-investment-package') }}" class="">New</a>
                         </li>
                         <li>
-                            <a href="javascript: void(0);" class="">Categories</a>
+                            <a href="{{ route('admin.investment-packages') }}" class="">All Packages</a>
                         </li>
                         <li>
                             <a href="javascript: void(0);" class="">View</a>

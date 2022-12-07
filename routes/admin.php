@@ -13,6 +13,9 @@ use App\Http\Livewire\Admin\OfferLoanComponent;
 use App\Http\Livewire\Admin\ReadUsersComponent;
 
 use App\Http\Livewire\Admin\UserLoanComponent;
+use App\Http\Livewire\Investment\Admin\CreateInvestmentPackage;
+use App\Http\Livewire\Investment\Admin\InvestmentPackage;
+use App\Http\Livewire\Investment\Admin\InvestmentPackages;
 use App\Http\Livewire\Notifications\InboxComponent;
 
 use Illuminate\Support\Facades\Route;
@@ -32,7 +35,11 @@ Route::middleware(['auth','admin'])->group(function (){
     Route::get('user/{_id}/loans', UserLoanComponent::class)->name('user-loan-component');
     Route::get('user/{_uid}/loan/{_lid}', EditSingleUserLoanComponent::class)->name('edit-single-user-loan-component');
 
-
+    Route::prefix('investments')->group(function (){
+        Route::get('packages/create', CreateInvestmentPackage::class)->name('create-investment-package');
+        Route::get('packages',InvestmentPackages::class)->name('investment-packages');
+        Route::get('packages/{_id}/edit', InvestmentPackage::class)->name('investment-package');
+    });
 });
 
 
