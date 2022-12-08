@@ -45,6 +45,9 @@
                                             <a wire:click.prevent="banUser({{ $user['id'] }})" class="dropdown-item" href="#">Suspend User</a>
                                         @endif
                                         <a wire:click.prevent="deleteUser({{ $user['id'] }})" class="dropdown-item" href="#">Remove</a>
+                                        <a class="dropdown-item" href="{{ route('admin.add-user-to-investment-package', ['_id'=>$user['id']]) }}">Add
+                                            user to
+                                            investment</a>
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>

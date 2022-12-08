@@ -23,4 +23,5 @@ trait DatesResolver
     {
         return Lending::find($lendingId)->duration;
     }
+
 }
