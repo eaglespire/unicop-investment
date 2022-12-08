@@ -88,7 +88,7 @@
                             <a href="{{ route('admin.investment-packages') }}" class="">All Packages</a>
                         </li>
                         <li>
-                            <a href="javascript: void(0);" class="">View</a>
+                            <a href="{{ route('admin.all-investments') }}" class="">Investments</a>
                         </li>
                     </ul>
                 </li>

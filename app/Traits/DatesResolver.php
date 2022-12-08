@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\Models\InvestmentPackage;
 use App\Models\Lending;
 use Carbon\Carbon;
 
@@ -23,5 +24,14 @@ trait DatesResolver
     {
         return Lending::find($lendingId)->duration;
     }
+    public static function buildInvestmentMaturityDate($startDate,$packageId): Carbon
+    {
+        //parse start date as carbon date
+        $parsedStartDate = Carbon::parse($startDate);
+        //investment duration
+        $duration = InvestmentPackage::find($packageId)->duration;
+        return $parsedStartDate->addDays(self::retrieveNumDays($duration));
+    }
+
 
 }

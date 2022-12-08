@@ -9,6 +9,7 @@ use App\Repositories\Loan;
 use App\Repositories\UserNotifications;
 use App\Repositories\UserRepository;
 use App\Workers\InvestmentPackageWorker;
+use App\Workers\InvestmentWorker;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -20,7 +21,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind('NotificationHelper', UserNotifications::class);
         $this->app->bind('Lease',Lending::class);
         $this->app->bind('LoanAccessor', Loan::class);
-        $this->app->bind('InvestmentWorkerFacade',InvestmentPackageWorker::class);
+        $this->app->bind('InvestmentPackageFacade',InvestmentPackageWorker::class);
+        $this->app->bind('InvestmentFacade',InvestmentWorker::class);
     }
 
     public function boot()

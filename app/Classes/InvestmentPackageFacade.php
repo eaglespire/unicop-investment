@@ -4,10 +4,10 @@ namespace App\Classes;
 
 use Illuminate\Support\Facades\Facade;
 
-class InvestmentWorkerFacade extends Facade
+class InvestmentPackageFacade extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'InvestmentWorkerFacade';
+        return 'InvestmentPackageFacade';
     }
 }
